@@ -7,10 +7,9 @@ plugins {
 	kotlin("plugin.serialization")
 
 	id("com.github.johnrengelman.shadow")
-	id("io.gitlab.arturbosch.detekt")
 }
 
-group = "template"
+group = "org.ecorous.bot.template"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -29,8 +28,6 @@ repositories {
 }
 
 dependencies {
-	detektPlugins(libs.detekt)
-
 	implementation(libs.kord.extensions)
 	implementation(libs.kotlin.stdlib)
 	implementation(libs.kx.ser)
@@ -41,10 +38,11 @@ dependencies {
 	implementation(libs.logback)
 	implementation(libs.logback.groovy)
 	implementation(libs.logging)
+	implementation(libs.bundles.exposed)
 }
 
 application {
-	mainClass.set("template.AppKt")
+	mainClass.set("org.ecorous.bot.template.AppKt")
 }
 
 tasks.withType<KotlinCompile> {
@@ -57,7 +55,7 @@ tasks.withType<KotlinCompile> {
 tasks.jar {
 	manifest {
 		attributes(
-			"Main-Class" to "template.AppKt"
+			"Main-Class" to "org.ecorous.bot.template.AppKt"
 		)
 	}
 }
@@ -68,8 +66,3 @@ java {
 	targetCompatibility = JavaVersion.VERSION_17
 }
 
-detekt {
-	buildUponDefaultConfig = true
-
-	config.from(rootProject.files("detekt.yml"))
-}
